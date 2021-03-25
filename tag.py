@@ -52,6 +52,7 @@ def main():
 	
 	#print(preprocessed_subs)
 
+	# S-tags
 	s_tagged = []
 	for line in preprocessed_subs:
 		res1 = re.search(r'^INT', line)
@@ -60,8 +61,16 @@ def main():
 			s_tagged.append('S|\t' + res1.string)
 		elif res2:
 			s_tagged.append('S|\t' + res2.string)
-	print(s_tagged)
+	#print(s_tagged)
 
+	# M-tags
+	m_tagged = []
+	for line in preprocessed_subs:
+		res3 = re.search('ON THE|IN THE|CUT TO:', line)
+		if res3:
+			m_tagged.append('M|\t' + res3.string)
+
+	#print(m_tagged)
 
 if __name__ == "__main__":
 	main()
