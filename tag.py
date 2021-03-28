@@ -10,44 +10,20 @@ def tokenizer(sentence):
 	sentence = sentence.lower()
 	return sentence
 
+
 def tagger(content):
 	tagged_sentences = []
 	for line in content:
 		scene = re.search(r'^INT.|^EXT.', line)
 		meta = re.search('ON THE|IN THE|CUT TO:', line)
+		character = re.search(r'[A-Z]{3,}|[A-Z] {3,}', line)
 		if scene:
 			tagged_sentences.append('S|\t' + scene.string)
 		elif meta:
 			tagged_sentences.append('M|\t' + meta.string)
+		elif character:
+			tagged_sentences.append('C|\t' + character.group(0))
 	return tagged_sentences
-
-
-def m_tagger(text):
-	m_tagged = []
-	for line in text:
-		res3 = re.search('ON THE|IN THE|CUT TO:', line)
-		if res3:
-			m_tagged.append('M|\t' + res3.string)
-	return m_tagged
-
-
-def s_tagger(text):
-	s_tagged = []
-	for line in text:
-		res1 = re.search(r'^INT.|^EXT.', line)
-		if res1:
-			s_tagged.append('S|\t' + res1.string)
-	return s_tagged
-
-
-def n_tagger(text):
-	pl = '\n'.join(text)
-	n_tagged = []
-	for line in pl:
-		if 'EXT.' in line:
-			n_tagged.append("".join(islice(pl,4)))
-
-	return n_tagged
 
 
 def main():
@@ -67,27 +43,12 @@ def main():
 	
 	#print(preprocessed_subs)
 
-	# S-tags
-	s_tags = s_tagger(preprocessed_subs)
-	#print(s_tags)
-
-	# M-tags
-	m_tags = m_tagger(preprocessed_subs)
-	#print(m_tags)
-	
-	# N-tags
-	n_tags = n_tagger(preprocessed_subs)
-	#print(n_tags)
-
 	tags = tagger(preprocessed_subs)
-	print(tags)
+	print('\n'.join(tags))
 
-
+	
 	preprocessed_text = '\n'.join(preprocessed_subs)
-	for line in preprocessed_subs:
-		if 'INT.' in line:
-			myline = line[line.index('INT') + 4]
-	#print(myline)
+
 
 
 
