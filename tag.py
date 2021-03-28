@@ -13,10 +13,12 @@ def tokenizer(sentence):
 def tagger(content):
 	tagged_sentences = []
 	for line in content:
-		if 'EXT.' in line or 'INT.' in line:
-			tagged_sentences.append('S|\t' + line)
-		elif 'CUT TO:' in line or 'ON THE SCREEN' in line or 'IN THE CLOSET' in line:
-			tagged_sentences.append('M|\t' + line)
+		scene = re.search(r'^INT.|^EXT.', line)
+		meta = re.search('ON THE|IN THE|CUT TO:', line)
+		if scene:
+			tagged_sentences.append('S|\t' + scene.string)
+		elif meta:
+			tagged_sentences.append('M|\t' + meta.string)
 	return tagged_sentences
 
 
@@ -77,11 +79,15 @@ def main():
 	n_tags = n_tagger(preprocessed_subs)
 	#print(n_tags)
 
+	tags = tagger(preprocessed_subs)
+	print(tags)
+
+
 	preprocessed_text = '\n'.join(preprocessed_subs)
 	for line in preprocessed_subs:
-		if 'EXT.' in line:
-			#print(line)
-			print(''.join(islice(preprocessed_text,4)))
+		if 'INT.' in line:
+			myline = line[line.index('INT') + 4]
+	#print(myline)
 
 
 
