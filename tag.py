@@ -14,21 +14,22 @@ def tokenizer(sentence):
 def tagger(content):
 	tagged_sentences = []
 	for line in content:
-		scene = re.search(r'^INT.|^EXT.', line)
-		meta = re.search('ON THE|IN THE|CUT TO:', line)
-		meta2 = re.search(r'(\(.+\))', line)
+		scene = re.search(r'^ {5}INT\.|^ {5}EXT\.', line)
+		meta1 = re.search(r'^ {5}ON THE|^ {5}IN THE|^ {5}CUT TO:', line)
+		meta2 = re.search(r'^(\(.\))', line)
 		character = re.search(r'[A-Z]{3,}|[A-Z] {3,}', line)
-		descr = re.search(r'^ {5}[A-Za-z]', line)
+		descr = re.search(r'^ {5}[A-Z]{15,}|^ {5}[a-z]{5,}', line)
+		dialogue = re.search(r' {16}[A-Za-z ]{10,}', line)
 		if scene:
 			tagged_sentences.append('S|\t' + scene.string)
-		elif meta:
-			tagged_sentences.append('M|\t' + meta.string)
-		elif meta2:
-			tagged_sentences.append('M|\t' + meta2.string)
+		elif meta1:
+			tagged_sentences.append('M|\t' + meta1.string)
 		elif character:
 			tagged_sentences.append('C|\t' + character.group(0))
-		else:
-			tagged_sentences.append('?|\t'+ line)
+		elif descr:
+			tagged_sentences.append('N|\t' + descr.string)
+		elif dialogue:
+			tagged_sentences.append('D|\t' + dialogue.string)
 	return tagged_sentences
 
 
@@ -38,31 +39,15 @@ def main():
 
 
 	file_content = file_content.split('\n')
-	preprocessed_subs = []
-	for line in file_content:
-		line = re.sub(' +',' ',line)
-		line = re.sub('\n', ' ', line)
-		line = re.sub('  ', '', line)
-		line = re.sub(r'^ ', '', line)
-		if line != '':
-#            line = tokenizer(line)
-			preprocessed_subs.append(line)
+	#print(file_content)
 	
 	#print(preprocessed_subs)
 
-	tags = tagger(preprocessed_subs)
+	tags = tagger(file_content)
+	print('\n'.join(tags))
 	
-	tags2 = []
-	for line in tags:
-		if '?|\t' in line:
-			line = line.replace('?|\t', 'N|\t')
-			tags2.append(line)
-		else:
-			tags2.append(line)
-
-	print('\n'.join(tags2))
 	
-	preprocessed_text = '\n'.join(preprocessed_subs)
+	#preprocessed_text = '\n'.join(preprocessed_subs)
 
 
 if __name__ == "__main__":
