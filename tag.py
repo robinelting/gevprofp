@@ -17,19 +17,21 @@ def tagger(content):
 		scene = re.search(r'^ {5}INT\.|^ {5}EXT\.', line)
 		meta1 = re.search(r'^ {5}ON THE|^ {5}IN THE|^ {5}CUT TO:', line)
 		meta2 = re.search(r'^(\(.\))', line)
-		character = re.search(r'[A-Z]{3,}|[A-Z] {3,}', line)
-		descr = re.search(r'^ {5}[A-Z]{15,}|^ {5}[a-z]{5,}', line)
+		character = re.search(r' {26}[A-Z]{3,}', line)
+		descr = re.search(r'^ {5}[A-Za-z]', line)
 		dialogue = re.search(r' {16}[A-Za-z ]{10,}', line)
 		if scene:
-			tagged_sentences.append('S|\t' + scene.string)
+			tagged_sentences.append('S|\t' + scene.string + '\n')
 		elif meta1:
-			tagged_sentences.append('M|\t' + meta1.string)
+			tagged_sentences.append('M|\t' + meta1.string + '\n')
 		elif character:
-			tagged_sentences.append('C|\t' + character.group(0))
+			tagged_sentences.append('C|\t\t' + character.string + '\n')
 		elif descr:
-			tagged_sentences.append('N|\t' + descr.string)
+			tagged_sentences.append('N|' + descr.string)
 		elif dialogue:
-			tagged_sentences.append('D|\t' + dialogue.string)
+			tagged_sentences.append('D|' + dialogue.string + '\n')
+		else:
+			tagged_sentences.append(' |' + line)
 	return tagged_sentences
 
 
@@ -45,9 +47,7 @@ def main():
 
 	tags = tagger(file_content)
 	print('\n'.join(tags))
-	
-	
-	#preprocessed_text = '\n'.join(preprocessed_subs)
+
 
 
 if __name__ == "__main__":
