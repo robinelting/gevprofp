@@ -10,3 +10,6 @@ For this project we have created a preprocessing tool that aligns scripts and su
 * Eva Dyadko
 * Pieter Jansma
 
+# Division of labour
+Tagging: Robin Elting
+
