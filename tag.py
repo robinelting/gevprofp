@@ -13,38 +13,15 @@ def tokenizer(sentence):
 	return sentence
 
 
-def tagger(content):
-	tagged_sentences = []
-	dic_tag = dict()
-	for line in content:
-		scene = re.search(r'INT\.|EXT\.', line)
-		meta1 = re.search(r'^ {5}ON THE|^ {5}IN THE|CUT TO:|THE END|FINAL SHOOTING SCRIPT', line)
-		meta2 = re.search(r'^(\(.+\))', line)
-		character = re.search(r' {26}[A-Z]{3,}', line)
-		descr = re.search(r'^ {5}[A-Za-z]', line)
-		dialogue = re.search(r' {16}[A-Za-z ]{10,}', line)
-		if scene:
-			tagged_sentences.append('S|\t' + scene.string + '\n')
-		elif meta1:
-			tagged_sentences.append('M|\t' + meta1.string + '\n')
-		elif meta2:
-			tagged_sentences.append('M|\t' + meta2.string + '\n')
-		elif character:
-			tagged_sentences.append('C|\t\t' + character.string + '\n')
-		elif descr:
-			tagged_sentences.append('N|' + descr.string)
-		elif dialogue:
-			tagged_sentences.append('D|' + dialogue.string + '\n')
-		else:
-			tagged_sentences.append(' |' + line)
-	return tagged_sentences
-
 def dic_tagger(content):
+	"""Searches for regex patterns and creates a dictionary with tagged lines
+	:param content: line-splitted text
+	"""
 	dic_tag = dict()
 	for line in content:
 		scene = re.search(r'INT\.|EXT\.', line)
 		meta1 = re.search(r'^ {5}ON THE|^ {5}IN THE|CUT TO:|THE END|FINAL SHOOTING SCRIPT', line)
-		meta2 = re.search(r'^(\(.+\))', line)
+		meta2 = re.search(r'[A-Z]\:|  \([A-Za-z0-9 ]+\)', line)
 		character = re.search(r' {26}[A-Z]{3,}', line)
 		descr = re.search(r'^ {5}[A-Za-z]', line)
 		dialogue = re.search(r' {16}[A-Za-z ]{10,}', line)
@@ -62,28 +39,27 @@ def dic_tagger(content):
 			dic_tag[dialogue.string] = 'D'
 		else:
 			dic_tag[line] = ' '
-	return dic_tag
+	
+	new_dic = dict()
+	for k, v in dic_tag.items():
+		k2 = re.sub(r' {3,}', '', k)
+		if k2 not in new_dic:
+			new_dic[k2] = v
+
+	return new_dic
 
 
 def main():
 	with open(sys.argv[1], 'rt', encoding='utf8') as f:
 		file_content = f.read()
 
-
 	file_content = file_content.split('\n')
 
-	tags = tagger(file_content)
-
 	tag_dic = dic_tagger(file_content)
-	new_dic = dict()
-	for k, v in tag_dic.items():
-		k2 = re.sub(r' {3,}', '', k)
-		if k2 not in new_dic:
-			new_dic[k2] = v
 
 	with open('output.csv', 'w') as output:
 		writer = csv.writer(output)
-		for key, value in new_dic.items():
+		for key, value in tag_dic.items():
 			writer.writerow([key, value])
 
 
