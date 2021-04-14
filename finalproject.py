@@ -61,7 +61,7 @@ def subtitles_preprocessing(args):
 
 
 def script_aligner(tagged_sentences, subs_text, subs_time):
-	"""aligns subtitles, timestamps and script into a cohesive dictionary
+	"""aligns subtitles, timestamps and script into a list
 	:param tagged_sentences: list of tagged script sentences
 	:param subs_text: preprocessed subtitles
 	:param subs_time: preprocessed timestamps
