@@ -22,6 +22,21 @@ In this GitHub repository you can find the Python script needed to align movie s
 * Eva Dyadko
 * Pieter Jansma
 
+## System requirements
+To run this program, a few packages need to be installed:
+
+### NLTK
+1. Install NLTK:
+   ```ruby
+   pip install --user -U nltk
+   ```
+
+### PYSRT
+1. Install PYSRT
+   ```ruby
+   sudo pip install pysrt
+   ```
+
 ## Access files
 You can access the files from this repository in two ways; downloading direct from GitHub or cloning the repository.
 
