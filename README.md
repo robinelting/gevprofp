@@ -24,21 +24,25 @@ This will result in a CSV file with a table including all script lines and their
 To run this program, a few packages need to be installed:
 
 ### NLTK
-1. Install NLTK:
+* Install NLTK:
    ```ruby
    pip install --user -U nltk
    ```
+* Or use: https://www.nltk.org/install.html
 
 ### PYSRT
-1. Install PYSRT
+* Install PYSRT
    ```ruby
    sudo pip install pysrt
    ```
+* Or use: https://pypi.org/project/pysrt/
+
 ### Pandas
-1. Install Pandas
+* Install Pandas
    ```ruby
    pip install pandas
    ```
+* Or use: https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html
 
 ## Access files
 You can access the files from this repository in two ways; downloading direct from GitHub or cloning the repository.
