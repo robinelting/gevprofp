@@ -4,16 +4,14 @@ Group name: dubieus.rar
 In this GitHub repository you can find the Python script needed to align movie script and subtitles. We have tested our Python script on the Mission Impossible files and the files related to the movie 'It'.
 
 ## Program Information
-#### For each subtitle, the program adds:
-* The character name 
-* The matching line of the script.
+This program aligns subtitles and scripts.
 
 #### For each line of the script, the program adds:
-* The M for Metadata
-* S for Scene boundary
-* N for Scene description
-* C for Character name
-* D for Dialogue
+* The corresponding tag (either S for scene boundary, M for meta-data, C for character name, N for scene description, and D for dialogue)
+* The corresponding subtitle
+* The corresponding timestamp to the subtitle
+
+This will result in a CSV file with a table including all script lines and their corresponding tags, subtitles and timestamps.
 
 ## Contributors:
 
