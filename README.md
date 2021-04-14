@@ -61,12 +61,12 @@ You can clone the repository as follows:
 After you have downloaded the necessary files, you can run the script called `fp.py` as follows:
 1. Run the following command
    ```ruby
-   python3 fp.py SCRIPT SUBTITLES
+   python3 finalproject.py SCRIPT SUBTITLES OUTPUTFILE
    ```
-   Here you need to change `SCRIPT` into the .txt file with the movie script and `SUBTITLES` into the    .srt file with the movie subtitles
+   Here you need to change `SCRIPT` into the .txt file with the movie script, `SUBTITLES` into the .srt file with the movie subtitles, and `OUTPUTFILE` into a desired output        .csv file.
 2. With the Mission Impossible files, you would run the program as follows:
    ```ruby
-   python3 fp.py mi.txt mi.srt
+   python3 finalproject.py mi.txt mi.srt output.csv
    ```
 
 ## Division of labor
