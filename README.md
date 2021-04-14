@@ -72,7 +72,7 @@ After you have downloaded the necessary files, you can run the script called `fp
 ## Division of labor
 The division of labor for our Final Project is as follows:
 
-* Robin Elting: Tagging movie scripts (this includes the functions tagger() and dic_tagger())
+* Robin Elting: Tagging movie scripts (this includes the functions tagger() and dic_tagger()), generating output file
 * Mark Bellman: Preprocessing of text, extracting timestamps and subtitles, aligning subtitles.
 * Eva Dyadko: Creation of unit tests
 * Pieter Jansma: Aligning subtitles
