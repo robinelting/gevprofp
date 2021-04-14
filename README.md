@@ -54,5 +54,10 @@ After you have downloaded the necessary files, you can run the script called `fp
    python3 fp.py mi.txt mi.srt
    ```
 
-4. After you have run the script on all files and written down the amount of tweets with and without mental keywords, you can sum up all tweets with and without mental health keywords for each year. This will give you the results of the amount of tweets with mental health keywords and the amount    of tweets without mental health keywords.
+## Division of labor
+The division of labor for our Final Project is as follows:
 
+* Robin Elting: Tagging movie scripts (this includes the functions tagger() and dic_tagger())
+* Mark Bellman: Preprocessing of text, extracting timestamps and subtitles, aligning subtitles.
+* Eva Dyadko: Creation of unit tests
+* Pieter Jansma: Aligning subtitles
