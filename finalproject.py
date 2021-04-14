@@ -20,8 +20,8 @@ def tagger(content):
 	"""
 	tagged_sentences = []
 	for line in content:
-		scene = re.search(r'INT\.|EXT\.', line)
-		meta1 = re.search(r'^ {5}ON THE|^ {5}IN THE|CUT TO:|THE END|FINAL SHOOTING SCRIPT', line)
+		scene = re.search(r'int\.|int\.', line)
+		meta1 = re.search(r'^ {5}ON THE|^ {5}IN THE|CUT TO:|THE END|FINAL SHOOTING SCRIPT|  \([A-Za-z0-9 ]+\)|[A-Z]\:', line)
 		meta2 = re.search(r'[A-Z]\:|  \([A-Za-z0-9 ]+\)', line)
 		character = re.search(r' {26}[A-Z]{3,}', line)
 		descr = re.search(r'^ {5}[A-Za-z]|^ {10}[A-Za-z]', line)
@@ -30,8 +30,8 @@ def tagger(content):
 			tagged_sentences.append(['S', scene.string])
 		elif meta1:
 			tagged_sentences.append(['M', meta1.string])
-		elif meta2:
-			tagged_sentences.append(['M', meta2.string])
+		#elif meta2:
+		#	tagged_sentences.append(['M', meta2.string])
 		elif character:
 			tagged_sentences.append(['C', character.string])
 		elif descr:
@@ -66,20 +66,33 @@ def script_aligner(tagged_sentences, subs_text, subs_time):
 	:param subs_text: preprocessed subtitles
 	:param subs_time: preprocessed timestamps
 	"""
+	sub_total = 0
+	sub_total_correct = 0
 	for sub_text, time in zip(subs_text, subs_time):
 		sub_set = set(re.split(r'\s+', sub_text))
 		resemblance_high = 0
 		best_resemblance = ''
 		for script in tagged_sentences:
-			script_set = set(re.split(r'\s+', script[1]))
-			resemblance = sub_set.intersection(script_set)
-			resemblance_correct = len(resemblance) / len(sub_set)
-			if resemblance_correct > resemblance_high:
-				resemblance_high = resemblance_correct
-				best_resemblance = resemblance
-				best_resemblance_index = tagged_sentences.index(script)
-				tagged_sentences[best_resemblance_index].append(sub_text)
-				tagged_sentences[best_resemblance_index].append(time)
+			if script[0] == 'D':
+				script[1] = script[1].lower()
+				script_set = set(re.split(r'\s+', script[1]))
+				resemblance = sub_set.intersection(script_set)
+				resemblance_correct = len(resemblance) / len(sub_set)
+				if resemblance_correct > 0.6:
+					if resemblance_correct > resemblance_high:
+						resemblance_high = resemblance_correct
+						best_resemblance = resemblance
+						best_resemblance_index = tagged_sentences.index(script)
+						tagged_sentences[best_resemblance_index].append(sub_text)
+						tagged_sentences[best_resemblance_index].append(time)
+
+
+		sub_total += len(sub_set)
+		sub_total_correct += len(best_resemblance)
+	print("Total amount of words in subtitles: {}\n"
+	"Total amount of words that match between script and subtitles: {}\n"
+	"Percentage of matches between script and subtitles: {}%\n"
+	.format(sub_total, sub_total_correct, sub_total_correct/sub_total*100))
 	return tagged_sentences
 
 
