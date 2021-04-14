@@ -20,7 +20,7 @@ This will result in a CSV file with a table including all script lines and their
 * Eva Dyadko
 * Pieter Jansma
 
-## System requirements
+## Installation requirements
 To run this program, a few packages need to be installed:
 
 ### NLTK
