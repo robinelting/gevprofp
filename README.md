@@ -42,3 +42,17 @@ You can clone the repository as follows:
    ```
 3. Press `Enter` to create your local clone.
 
+## Run script
+After you have downloaded the necessary files, you can run the script called `fp.py` as follows:
+1. Run the following command
+   ```ruby
+   python3 fp.py SCRIPT SUBTITLES
+   ```
+   Here you need to change `SCRIPT` into the .txt file with the movie script and `SUBTITLES` into the    .srt file with the movie subtitles
+2. With the Mission Impossible files, you would run the program as follows:
+   ```ruby
+   python3 fp.py mi.txt mi.srt
+   ```
+
+4. After you have run the script on all files and written down the amount of tweets with and without mental keywords, you can sum up all tweets with and without mental health keywords for each year. This will give you the results of the amount of tweets with mental health keywords and the amount    of tweets without mental health keywords.
+
