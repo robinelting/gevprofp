@@ -28,21 +28,21 @@ To run this program, a few packages need to be installed:
    ```ruby
    pip install --user -U nltk
    ```
-* Or use: https://www.nltk.org/install.html
+* Or use NLTK documentation: https://www.nltk.org/install.html
 
 ### PYSRT
 * Install PYSRT
    ```ruby
    sudo pip install pysrt
    ```
-* Or use: https://pypi.org/project/pysrt/
+* Or use PYSRT documentation: https://pypi.org/project/pysrt/
 
 ### Pandas
 * Install Pandas
    ```ruby
    pip install pandas
    ```
-* Or use: https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html
+* Or use Pandas documentation: https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html
 
 ## Access files
 You can access the files from this repository in two ways; downloading direct from GitHub or cloning the repository.
