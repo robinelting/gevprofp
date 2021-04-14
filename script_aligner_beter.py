@@ -1,7 +1,10 @@
 import sys
 import re
 import pysrt
-
+import csv
+from tag import dic_tagger
+import tkinter as tk
+from tkinter import simpledialog
 
 def tokenizer(sentence):
     """cleans up the sentence and makes it lowercase"""
@@ -10,13 +13,10 @@ def tokenizer(sentence):
     return sentence
 
 
-def script_preprocessing():
+def script_preprocessing(file_content):
     """opens up script (.txt) and returns two lists split by two newlines"""
     """returns a 'clean' list and a regular list"""
-    with open(sys.argv[1], 'rt', encoding='utf8') as f:
-        file_content = f.read()
-
-    file_content = re.sub('\. ','.\n\n',file_content)
+    file_content = re.sub('[\.!?] ','.\n\n',file_content)
     file_content = file_content.split('\n\n')
     preprocessed_script = []
     non_processed_script = []
@@ -75,7 +75,16 @@ def script_aligner(subs_text, subs_time, list_sets_script, non_processed_script)
 
 
 def main():
-    non_processed_script, preprocessed_script = script_preprocessing()
+    root = tk.Tk()
+    root.withdraw()
+    input_script = simpledialog.askstring(title="Title",
+                                          prompt="Enter your script file: ")
+    with open(sys.argv[1], 'rt', encoding='utf8') as f:
+        file_content = f.read()
+    input_sub = simpledialog.askstring(title="Title",
+                                       prompt="Enter your subtitles file: ")
+    subs = pysrt.open(input_sub, encoding='iso-8859-1')
+    non_processed_script, preprocessed_script = script_preprocessing(file_content)
     list_sets_script = script_to_sets(preprocessed_script)
     subs_text, subs_time = subtitles_preprocessing()
 
