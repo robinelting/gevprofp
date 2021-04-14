@@ -66,6 +66,12 @@ After you have downloaded the necessary files, you can run the script called `fp
    ```ruby
    python3 finalproject.py mi.txt mi.srt output.csv
    ```
+## Run unittest
+You can run the unittests as follows:
+1. Run the following command
+   ```ruby
+   python3 finalproject.py SCRIPT SUBTITLES OUTPUTFILE
+   ```
 
 ## Division of labor
 In general we all worked together via Google Meet on this project. This means that we worked together on certain aspects of the project and that multiple persons worked on the same aspect of the project. However, the following shows a more specific division of labor for our Final Project:
