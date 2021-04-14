@@ -70,9 +70,9 @@ After you have downloaded the necessary files, you can run the script called `fp
    ```
 
 ## Division of labor
-The division of labor for our Final Project is as follows:
+In general we all worked together via Google Meet on this project. This means that we worked together on certain aspects of the project and that multiple persons worked on the same aspect of the project. However, the following shows a more specific division of labor for our Final Project:
 
-* Robin Elting: Tagging movie scripts (this includes the functions tagger() and dic_tagger()), generating output file
-* Mark Bellman: Preprocessing of text, extracting timestamps and subtitles, aligning subtitles.
-* Eva Dyadko: Creation of unit tests
-* Pieter Jansma: Aligning subtitles
+* Robin Elting: Tagging movie scripts (tagger() function), generating output file, aligning scripts and subtitles (script_aligner() function)
+* Mark Bellman: Preprocessing of text (subtitle_preprocessing() function), extracting timestamps and subtitles (subtitle_preprocessing() function), aligning scripts subtitles (script_aligner() function).
+* Eva Dyadko: Creation of unit tests, aligning scripts and subtitles (script_aligner() function)
+* Pieter Jansma: Aligning scripts and subtitles (script_aligner() function), extracting timestamps and subtitles (subtitle_preprocessing() function)
