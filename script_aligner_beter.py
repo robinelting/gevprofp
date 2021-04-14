@@ -58,6 +58,8 @@ def script_to_sets(preprocessed_script):
 def script_aligner(subs_text, subs_time, list_sets_script, non_processed_script):
     """aligns subtitles, timestamps and script into a cohesive dictionary"""
     aligned_script = {}
+    sub_total = 0
+    sub_total_correct = 0
     for sub_text, time in zip(subs_text, subs_time):
         sub_set = set(re.split('\s+', sub_text))
         resemblance_high = 0
@@ -69,7 +71,13 @@ def script_aligner(subs_text, subs_time, list_sets_script, non_processed_script)
                 resemblance_high = resemblance_correct
                 best_resemblance = resemblance
                 best_resemblance_index = list_sets_script.index(script_set)
-        aligned_script[sub_text] = non_processed_script[best_resemblance_index], time
+        aligned_script[non_processed_script[best_resemblance_index]] = sub_text, time
+        sub_total += len(sub_set)
+        sub_total_correct += len(best_resemblance)
+    print("total amount of words in subtitles: {}\n"
+          "total amount of words that match between script and subs: {}\n"
+          "percentage of matches between script and subs: {}%\n"
+           .format(sub_total, sub_total_correct, sub_total_correct/sub_total*100))
 
     return aligned_script
 
@@ -89,11 +97,6 @@ def main():
     subs_text, subs_time = subtitles_preprocessing()
 
     aligned_script = script_aligner(subs_text, subs_time, list_sets_script, non_processed_script)
-
-    for item in aligned_script:
-        print(item)
-        print(aligned_script[item])
-        print('\n')
 
 
 if __name__ == "__main__":
