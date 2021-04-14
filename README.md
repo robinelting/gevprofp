@@ -34,6 +34,11 @@ To run this program, a few packages need to be installed:
    ```ruby
    sudo pip install pysrt
    ```
+### Pandas
+1. Install Pandas
+   ```ruby
+   pip install pandas
+   ```
 
 ## Access files
 You can access the files from this repository in two ways; downloading direct from GitHub or cloning the repository.
@@ -68,7 +73,7 @@ After you have downloaded the necessary files, you can run the script called `fp
    ```
 ## Run unittest
 You can run the unittests as follows:
-1. Run the following command
+1. Run the following command in the directory of `finalproject.py`
    ```ruby
    python3 -m unittest
    ```
