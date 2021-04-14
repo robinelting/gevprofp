@@ -13,7 +13,7 @@ In this GitHub repository you can find the Python script needed to align movie s
 * S for Scene boundary
 * N for Scene description
 * C for Character name
-* D for dialogue
+* D for Dialogue
 
 ## Contributors:
 
