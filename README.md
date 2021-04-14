@@ -70,7 +70,7 @@ After you have downloaded the necessary files, you can run the script called `fp
 You can run the unittests as follows:
 1. Run the following command
    ```ruby
-   python3 finalproject.py SCRIPT SUBTITLES OUTPUTFILE
+   python3 -m unittest
    ```
 
 ## Division of labor
