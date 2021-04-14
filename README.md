@@ -1,7 +1,7 @@
 # Final Project Gevorderd Programmeren - dubieus.rar
 Group name: dubieus.rar
 
-In this GitHub repository you can find the Python script needed to align movie script and subtitles.
+In this GitHub repository you can find the Python script needed to align movie script and subtitles. We have tested our Python script on the Mission Impossible files and the files related to the movie 'It'.
 
 ## Program Information
 #### For each subtitle, the program adds:
