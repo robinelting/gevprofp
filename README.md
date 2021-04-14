@@ -11,7 +11,7 @@ This program aligns subtitles and scripts.
 * The corresponding subtitle
 * The corresponding timestamp to the subtitle
 
-This will result in a CSV file with a table including all script lines and their corresponding tags, subtitles and timestamps.
+This Python program will result in a CSV output file with a table including all script lines and their corresponding tags, subtitles and timestamps.
 
 ## Contributors:
 
